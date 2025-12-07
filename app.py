@@ -510,6 +510,6 @@ HTML_TEMPLATE = '''
 '''
 
 if __name__ == '__main__':
-    print("🚀 Starting Quantum Dance Emotion Recommender...")
-    print("📍 Open http://localhost:5000 in your browser")
+    print("Starting Quantum Dance Emotion Recommender...")
+    print("Open http://localhost:5000 in your browser")
     app.run(debug=True, host='0.0.0.0', port=5000)
