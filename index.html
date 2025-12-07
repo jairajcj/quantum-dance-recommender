@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Dance Emotion Recommender - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #818cf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .demo-notice {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid #6366f1;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .demo-notice h2 {
+            color: #818cf8;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-notice p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .demo-notice a {
+            color: #818cf8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .demo-notice a:hover {
+            text-decoration: underline;
+        }
+
+        .upload-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #6366f1;
+            border-radius: 0.75rem;
+            padding: 3rem;
+            text-align: center;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .emotions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .emotion {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .emotion-label {
+            text-transform: capitalize;
+            margin-bottom: 0.5rem;
+        }
+
+        .emotion-value {
+            font-size: 1.5rem;
+            color: #818cf8;
+            font-weight: bold;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .rec-item {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .rec-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .rec-dance {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .rec-score {
+            color: #818cf8;
+            font-weight: bold;
+        }
+
+        .rec-reasoning {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .quantum-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .feature h3 {
+            color: #818cf8;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌌 Quantum Dance Emotion Recommender</h1>
+        <p class="subtitle">AI-powered emotion analysis for dance videos</p>
+
+        <div class="demo-notice">
+            <h2>📌 Static Demo Page</h2>
+            <p>This is a demonstration of the UI. The full application requires a Python backend to run.</p>
+            <p>To run the complete application locally, visit the <a
+                    href="https://github.com/jairajcj/quantum-dance-recommender" target="_blank">GitHub repository</a>
+                and follow the setup instructions.</p>
+        </div>
+
+        <div class="upload-card">
+            <div class="upload-area">
+                <h3>📹 Upload Your Dance Video</h3>
+                <p>Drop your video here or click to browse</p>
+                <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 1rem;">MP4, AVI, MOV, MKV, WEBM (Max 100MB)</p>
+                <p style="font-size: 0.85rem; color: #f59e0b; margin-top: 1rem;">⚠️ Upload functionality requires the
+                    Python backend</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎭 Sample: Detected Emotions</h2>
+            <div class="emotions">
+                <div class="emotion">
+                    <div class="emotion-label">Energetic</div>
+                    <div class="emotion-value">85%</div>
+                </div>
+                <div class="emotion">
+                    <div class="emotion-label">Happy</div>
+                    <div class="emotion-value">72%</div>
+                </div>
+                <div class="emotion">
+                    <div class="emotion-label">Playful</div>
+                    <div class="emotion-value">68%</div>
+                </div>
+                <div class="emotion">
+                    <div class="emotion-label">Graceful</div>
+                    <div class="emotion-value">45%</div>
+                </div>
+                <div class="emotion">
+                    <div class="emotion-label">Calm</div>
+                    <div class="emotion-value">32%</div>
+                </div>
+                <div class="emotion">
+                    <div class="emotion-label">Neutral</div>
+                    <div class="emotion-value">28%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison">
+            <div class="card">
+                <h2>📊 Classical Recommendations</h2>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Hip-Hop</div>
+                        <div class="rec-score">92%</div>
+                    </div>
+                    <div class="rec-reasoning">Strong energetic emotion detected</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Salsa</div>
+                        <div class="rec-score">88%</div>
+                    </div>
+                    <div class="rec-reasoning">High happiness and energy levels</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Jazz</div>
+                        <div class="rec-score">76%</div>
+                    </div>
+                    <div class="rec-reasoning">Playful movement patterns</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Breakdance</div>
+                        <div class="rec-score">71%</div>
+                    </div>
+                    <div class="rec-reasoning">Dynamic energy signature</div>
+                </div>
+            </div>
+
+            <div class="card" style="border-color: rgba(99, 102, 241, 0.3);">
+                <h2>⚛️ Quantum Recommendations<span class="quantum-badge">QUANTUM</span></h2>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Hip-Hop</div>
+                        <div class="rec-score">94%</div>
+                    </div>
+                    <div class="rec-reasoning">Quantum entanglement detected (amplitude: 0.94)</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Breakdance</div>
+                        <div class="rec-score">89%</div>
+                    </div>
+                    <div class="rec-reasoning">Superposition state: high energy coherence</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Salsa</div>
+                        <div class="rec-score">85%</div>
+                    </div>
+                    <div class="rec-reasoning">Quantum correlation with joy states</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <div class="rec-dance">Jazz</div>
+                        <div class="rec-score">78%</div>
+                    </div>
+                    <div class="rec-reasoning">Wave function collapse: playful patterns</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>✨ Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🎥 Video Analysis</h3>
+                    <p>Advanced optical flow processing to extract motion features from dance videos</p>
+                </div>
+                <div class="feature">
+                    <h3>🧠 Emotion Detection</h3>
+                    <p>Combines facial recognition and movement analysis for accurate emotion detection</p>
+                </div>
+                <div class="feature">
+                    <h3>📊 Classical AI</h3>
+                    <p>Traditional weighted recommendation based on emotion-dance mappings</p>
+                </div>
+                <div class="feature">
+                    <h3>⚛️ Quantum-Inspired</h3>
+                    <p>Novel quantum computing concepts like superposition and entanglement for enhanced recommendations
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 Run Locally</h2>
+            <div
+                style="background: rgba(15, 23, 42, 0.5); padding: 1.5rem; border-radius: 0.5rem; font-family: 'Courier New', monospace;">
+                <p style="color: #94a3b8; margin-bottom: 1rem;"># Clone the repository</p>
+                <p style="color: #f1f5f9; margin-bottom: 1.5rem;">git clone
+                    https://github.com/jairajcj/quantum-dance-recommender.git</p>
+
+                <p style="color: #94a3b8; margin-bottom: 1rem;"># Install dependencies</p>
+                <p style="color: #f1f5f9; margin-bottom: 1.5rem;">pip install -r requirements.txt</p>
+
+                <p style="color: #94a3b8; margin-bottom: 1rem;"># Run the application</p>
+                <p style="color: #f1f5f9; margin-bottom: 1.5rem;">python app.py</p>
+
+                <p style="color: #94a3b8; margin-bottom: 1rem;"># Open in browser</p>
+                <p style="color: #f1f5f9;">http://localhost:5000</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
